@@ -1,0 +1,38 @@
+version: "3.4"
+services:
+    rs-ix-ix100:
+        build: ./rs-ix-ix100
+        image: 127.0.0.1:5000/rs-ix-ix100
+        cap_add:
+            - ALL
+        sysctls:
+            - net.ipv4.ip_forward=1
+            - net.ipv4.conf.default.rp_filter=0
+            - net.ipv4.conf.all.rp_filter=0
+        privileged: true
+        networks:
+            net-ix-ix100:
+                ipv4_address: 10.100.0.100
+
+        labels:
+            org.seedsecuritylabs.seedemu.meta.asn: "100"
+            org.seedsecuritylabs.seedemu.meta.nodename: "ix100"
+            org.seedsecuritylabs.seedemu.meta.role: "Route Server"
+            org.seedsecuritylabs.seedemu.meta.net.0.name: "ix100"
+            org.seedsecuritylabs.seedemu.meta.net.0.address: "10.100.0.100/24"
+
+
+networks:
+    net-ix-ix100:
+        driver: overlay
+        ipam:
+            config:
+                - subnet: 10.100.0.0/24
+        labels:
+            org.seedsecuritylabs.seedemu.meta.type: "global"
+            org.seedsecuritylabs.seedemu.meta.scope: "ix"
+            org.seedsecuritylabs.seedemu.meta.name: "ix100"
+            org.seedsecuritylabs.seedemu.meta.prefix: "10.100.0.0/24"
+
+
+

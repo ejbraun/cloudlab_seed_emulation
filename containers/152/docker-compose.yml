@@ -1,0 +1,67 @@
+version: "3.4"
+services:
+    hnode-152-web:
+        build: ./hnode-152-web
+        image: 127.0.0.1:5000/hnode-152-web
+        cap_add:
+            - ALL
+        sysctls:
+            - net.ipv4.ip_forward=1
+            - net.ipv4.conf.default.rp_filter=0
+            - net.ipv4.conf.all.rp_filter=0
+        privileged: true
+        networks:
+            net-152-net0:
+                ipv4_address: 10.152.0.71
+
+        labels:
+            org.seedsecuritylabs.seedemu.meta.asn: "152"
+            org.seedsecuritylabs.seedemu.meta.nodename: "web"
+            org.seedsecuritylabs.seedemu.meta.role: "Host"
+            org.seedsecuritylabs.seedemu.meta.net.0.name: "net0"
+            org.seedsecuritylabs.seedemu.meta.net.0.address: "10.152.0.71/24"
+
+    rnode-152-router0:
+        build: ./rnode-152-router0
+        image: 127.0.0.1:5000/rnode-152-router0
+        cap_add:
+            - ALL
+        sysctls:
+            - net.ipv4.ip_forward=1
+            - net.ipv4.conf.default.rp_filter=0
+            - net.ipv4.conf.all.rp_filter=0
+        privileged: true
+        networks:
+            net-152-net0:
+                ipv4_address: 10.152.0.254
+            net-ix-ix100:
+                ipv4_address: 10.100.0.152
+
+        labels:
+            org.seedsecuritylabs.seedemu.meta.asn: "152"
+            org.seedsecuritylabs.seedemu.meta.nodename: "router0"
+            org.seedsecuritylabs.seedemu.meta.role: "Router"
+            org.seedsecuritylabs.seedemu.meta.net.0.name: "net0"
+            org.seedsecuritylabs.seedemu.meta.net.0.address: "10.152.0.254/24"
+            org.seedsecuritylabs.seedemu.meta.net.1.name: "ix100"
+            org.seedsecuritylabs.seedemu.meta.net.1.address: "10.100.0.152/24"
+
+
+networks:
+    net-152-net0:
+        driver_opts:
+            com.docker.network.driver.mtu: 1500
+        ipam:
+            config:
+                - subnet: 10.152.0.0/24
+        labels:
+            org.seedsecuritylabs.seedemu.meta.type: "local"
+            org.seedsecuritylabs.seedemu.meta.scope: "152"
+            org.seedsecuritylabs.seedemu.meta.name: "net0"
+            org.seedsecuritylabs.seedemu.meta.prefix: "10.152.0.0/24"
+
+    net-ix-ix100:
+        external:
+            name: ix_net-ix-ix100
+
+
