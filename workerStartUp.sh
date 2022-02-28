@@ -6,6 +6,6 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo apt-get -y install docker-compose
 
-TOKEN=$(ssh -p 22 "root@node0" "docker swarm join-token --quiet worker")
+TOKEN=$(ssh -o StrictHostKeyChecking=no -p 22 "root@node0" "docker swarm join-token --quiet worker")
 sudo docker swarm join --token $TOKEN $MANAGER_IP:2377
 sudo modprobe mpls_router
