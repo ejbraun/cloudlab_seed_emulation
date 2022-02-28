@@ -179,11 +179,11 @@ for i in range(params.nodeCount):
         pass
     #Run services for manager node
     if i == 0:
-        node.addService(rspec.Execute(shell="bash", command="/local/repository/managerStartUp.sh 2>&1 > /local/repository/start.log"))
-        node.addService(rspec.Execute(shell="bash", command="/local/repository/startEmulation.sh {} 2>&1 > /local/repository/start.log".format(params.nodeCount + 1)))
+        node.addService(pg.Execute(shell="bash", command="/local/repository/managerStartUp.sh 2>&1 > /local/repository/start.log"))
+        node.addService(pg.Execute(shell="bash", command="/local/repository/startEmulation.sh {} 2>&1 > /local/repository/start.log".format(params.nodeCount + 1)))
     #Run service for worker nodes
     else:
-        node.addService(rspec.Execute(shell="bash", command="/local/repository/workerStartUp.sh 2>&1 > /local/repository/start.log"))
+        node.addService(pg.Execute(shell="bash", command="/local/repository/workerStartUp.sh 2>&1 > /local/repository/start.log"))
     pass
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
