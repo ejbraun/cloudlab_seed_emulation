@@ -149,7 +149,7 @@ for i in range(params.nodeCount):
     # Add to lan
     if params.nodeCount > 1:
         iface = node.addInterface("eth1")
-        iface.addAddress(rspec.IPv4Address("192.168.6.{}".format(i + 1, "255.255.255.0"))
+        iface.addAddress(rspec.IPv4Address("192.168.6.{}".format(i + 1, "255.255.255.0")))
         lan.addInterface(iface)
         # Allows worker nodes to ssh into manager nodes to fetch swarm token
         node.installRootKeys(True, True)
