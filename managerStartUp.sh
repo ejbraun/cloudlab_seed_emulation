@@ -1,10 +1,10 @@
 #!/bin/bash
 MANAGER_IP=192.168.6.1
-sudo apt-get update
+sudo apt-get -y update
 sudo apt-get -qq --no-install-recommends install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-sudo apt-get install docker-compose
+sudo apt-get -y install docker-compose
 
 sudo docker swarm init --advertise-addr=$MANAGER_IP
 
