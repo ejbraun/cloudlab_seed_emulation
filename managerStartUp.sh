@@ -26,13 +26,13 @@ do
     sleep 10
 done
 # Create docker registry
-docker service create --name registry --publish published=5000,target=5000 registry:2
+sudo docker service create --name registry --publish published=5000,target=5000 registry:2
 # Start up services
 filename='priority.txt'
 while read p; do
     sudo docker-compose -f "containers/${p}/docker-compose.yml" build
     sudo docker-compose -f "containers/${p}/docker-compose.yml" push
-    docker service create \
+    sudo docker service create \
        --name "${p}-wrapper" \
        --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
        --mount type=bind,source="/local/repository/containers/${p}",target=/tmp/ \
