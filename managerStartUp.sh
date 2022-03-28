@@ -35,7 +35,7 @@ while read p; do
     docker service create \
        --name "${p}-wrapper" \
        --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-       --mount type=bind,source="containers/${p}",target=/tmp/ \
+       --mount type=bind,source="/local/repository/containers/${p}",target=/tmp/ \
        --workdir /tmp/ \
        docker/compose \
        docker-compose up
