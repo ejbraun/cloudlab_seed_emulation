@@ -62,6 +62,4 @@ networks:
 
     net-ix-ix100:
         external:
-            name: ix_net-ix-ix100
-
-
+            name: tmp_net-ix-ix100
