@@ -1,5 +1,11 @@
 version: "3.4"
 services:
+    cfee3a34e9c68ac1d16035a81a926786:
+        build:
+            context: .
+            dockerfile: dummies/cfee3a34e9c68ac1d16035a81a926786
+        image: cfee3a34e9c68ac1d16035a81a926786
+
     rs_ix_ix100:
         build: ./rs_ix_ix100
         image: 127.0.0.1:5000/rs_ix_ix100
