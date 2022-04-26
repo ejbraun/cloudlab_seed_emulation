@@ -1,8 +1,8 @@
 version: "3.4"
 services:
-    rs-ix-ix100:
-        build: ./rs-ix-ix100
-        image: 127.0.0.1:5000/rs-ix-ix100
+    rs_ix_ix100:
+        build: ./rs_ix_ix100
+        image: 127.0.0.1:5000/rs_ix_ix100
         cap_add:
             - ALL
         sysctls:
@@ -11,7 +11,7 @@ services:
             - net.ipv4.conf.all.rp_filter=0
         privileged: true
         networks:
-            net-ix-ix100:
+            net_ix_ix100:
                 ipv4_address: 10.100.0.100
 
         labels:
@@ -23,8 +23,9 @@ services:
 
 
 networks:
-    net-ix-ix100:
+    net_ix_ix100:
         driver: overlay
+        attachable: true
         ipam:
             config:
                 - subnet: 10.100.0.0/24

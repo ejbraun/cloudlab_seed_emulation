@@ -1,8 +1,8 @@
 version: "3.4"
 services:
-    hnode-152-web:
-        build: ./hnode-152-web
-        image: 127.0.0.1:5000/hnode-152-web
+    hnode_152_web:
+        build: ./hnode_152_web
+        image: 127.0.0.1:5000/hnode_152_web
         cap_add:
             - ALL
         sysctls:
@@ -11,7 +11,7 @@ services:
             - net.ipv4.conf.all.rp_filter=0
         privileged: true
         networks:
-            net-152-net0:
+            net_152_net0:
                 ipv4_address: 10.152.0.71
 
         labels:
@@ -21,9 +21,9 @@ services:
             org.seedsecuritylabs.seedemu.meta.net.0.name: "net0"
             org.seedsecuritylabs.seedemu.meta.net.0.address: "10.152.0.71/24"
 
-    rnode-152-router0:
-        build: ./rnode-152-router0
-        image: 127.0.0.1:5000/rnode-152-router0
+    rnode_152_router0:
+        build: ./rnode_152_router0
+        image: 127.0.0.1:5000/rnode_152_router0
         cap_add:
             - ALL
         sysctls:
@@ -32,9 +32,9 @@ services:
             - net.ipv4.conf.all.rp_filter=0
         privileged: true
         networks:
-            net-152-net0:
+            net_152_net0:
                 ipv4_address: 10.152.0.254
-            net-ix-ix100:
+            net_ix_ix100:
                 ipv4_address: 10.100.0.152
 
         labels:
@@ -48,7 +48,7 @@ services:
 
 
 networks:
-    net-152-net0:
+    net_152_net0:
         driver_opts:
             com.docker.network.driver.mtu: 1500
         ipam:
@@ -60,8 +60,15 @@ networks:
             org.seedsecuritylabs.seedemu.meta.name: "net0"
             org.seedsecuritylabs.seedemu.meta.prefix: "10.152.0.0/24"
 
-    net-ix-ix100:
+    net_ix_ix100:
         external:
-            name: tmp_net-ix-ix100
+            name: sim_ix_net_ix_ix100
+        driver: overlay
+        labels:
+            org.seedsecuritylabs.seedemu.meta.type: "global"
+            org.seedsecuritylabs.seedemu.meta.scope: "ix"
+            org.seedsecuritylabs.seedemu.meta.name: "ix100"
+            org.seedsecuritylabs.seedemu.meta.prefix: "10.100.0.0/24"
+
 
 
