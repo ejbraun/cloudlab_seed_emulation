@@ -1,3 +1,4 @@
+
 # BGPChain CloudLab Scenario Generator
     
 ## Seed Emulator
@@ -18,6 +19,11 @@ This section details the steps for writing a scenario:
  6. Verify that the correct output files are generated and exist in `containers`. 
 
 Once your scenario has been generated, it is time to move to the https://github.com/ejbraun/cloudlab_seed_emulation repository.
+
+#### Note: Local Development
+1. Instead of `DistributedDocker` as your compiler in your scenario python file, use `Docker` (make sure to add corresponding import statement to top of file).
+2. The corresponding containers / layout of the generated output inside of `./containers` will be a friendly, single docker-compose file.
+3. After `cd containers` , the only thing you need to do is run `docker-compose up` to start up the scenario locally.
 ## CloudLab 
 
 ### Getting A Scenario Running
